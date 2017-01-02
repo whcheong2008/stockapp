@@ -14,4 +14,15 @@ router.post('/validate', function(req, res, next) {
 	});
 });
 
+router.post('/retrieveCurrentBalanceByUser',function(req, res, next){
+	var db = req.db;
+	var userID = req.body.id;
+	db.getConnection(function(err,conn){
+		conn.query('select current_balance from users where id = ?',[userID],function(err,rows){
+			res.json(rows);
+			conn.release();
+		});
+	});
+});
+
 module.exports = router;
