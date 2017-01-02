@@ -5,39 +5,53 @@
 	<div class="col-md-12">
 		<table class="table table-striped table-bordered table-hover" >
 			<thead>
-				<tr>
+				<tr ng-switch on="listCtrl.transactiontype">
 					<th>
-						<div ng-switch on="listCtrl.transactiontype">
-							<div ng-switch-when="1">Date Purchased</div>
-							<div ng-switch-when="2">Date Sold</div>
-						</div>
+						<div ng-switch-when="1">Date Purchased</div>
+						<div ng-switch-when="2">Date Sold</div>
+
 					</th>
 					<th>Stock</th>
 					<th>Volume</th>
-					<th>Price</th>
-					<th>Value</th>
-					<th>Market Price</th>
-					<th>Market Value</th>
+					<th ng-switch-when="1"> Purchased Price</th>
+					<th ng-switch-when="1"> Purchased Value</th>	
+					<th ng-switch-when="1">Market Price</th>
+					<th ng-switch-when="1">Market Value</th>
+					
+					<th ng-switch-when="2"> Sale Price</th>
+					<th ng-switch-when="2"> Sale Value</th>
+					<th ng-switch-when="2"> Purchased Price</th>
+					<th ng-switch-when="2"> Purchased Value</th>
+					<th ng-switch-when="2"> Gain / Loss ($)</th>
+					<th ng-switch-when="2"> Gain / Loss (%)</th>
+
 					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="transaction-listing-row" ng-repeat="transaction in listCtrl.list | orderBy: 'date'">
+				<tr ng-switch on="listCtrl.transactiontype" class="transaction-listing-row" ng-repeat="transaction in listCtrl.list | orderBy: 'date'">
+
 					<td class="transaction-listing-cell">{{ transaction.date | date:'dd-MMM-yyyy' }}</td>
 					<td class="transaction-listing-cell">{{transaction.stock_name}}</td>
 					<td class="transaction-listing-cell">{{transaction.volume}}</td>
 					<td class="transaction-listing-cell">{{transaction.price | currency}}</td>
 					<td class="transaction-listing-cell">{{transaction.price * transaction.volume + transaction.commission | currency}}</td>
-					<td class="transaction-listing-cell">{{transaction.last_price  | currency}}</td>
-					<td class="transaction-listing-cell">{{transaction.last_price  * transaction.volume | currency}}</td>
 					
+					<td ng-switch-when="1" class="transaction-listing-cell">{{transaction.last_price  | currency}}</td>
+					<td ng-switch-when="1" class="transaction-listing-cell">{{transaction.last_price  * transaction.volume | currency}}</td>
+					
+					<td ng-switch-when="2" class="transaction-listing-cell">{{transaction.price | currency}}</td>
+					<td ng-switch-when="2" class="transaction-listing-cell">{{transaction.price | currency}}</td>
+					<td ng-switch-when="2" class="transaction-listing-cell">{{transaction.price | currency}}</td>
+					<td ng-switch-when="2" class="transaction-listing-cell">{{transaction.price}}</td>
+
 					<td class="transaction-listing-cell">
 						<!-- icons -->
 						<div class="action-buttons" ng-switch on="listCtrl.transactiontype">
 							<i class="fa fa-pencil-square-o fa-2x action-icon text-green" ng-click="listCtrl.OpenEditTransactionForm(transaction.id)" data-toggle="tooltip" title="Edit Transaction"></i>
 							<i class="fa fa-trash-o fa-2x action-icon text-danger" ng-click="listCtrl.OpenDeleteTransaction(transaction.id)" data-toggle="tooltip" title="Delete Transaction"></i>
 						</div>
-					</td>
+					</td>	
 				</tr>
 			</tbody>
 		</table>

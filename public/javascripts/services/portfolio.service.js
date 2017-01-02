@@ -12,6 +12,7 @@
 		var service = {};
 		
 		service.ProcessPortfolio = ProcessPortfolio;
+		service.ExtractStockTransactionsFromList = ExtractStockTransactionsFromList;
 		
 		//This method is the overall method that generates the portfolio based on FIFO method
 		function GeneratePortfolio(purchases,sales){
@@ -167,8 +168,8 @@
 			return deferred.promise;
 		}
 		
-		//This method extracts all transactions of a particular stock from a list 
-		function ExtractStockTransactionsFromList(stockID,mainList, list){
+		//This method extracts all transactions of a particular stock from a list and places it into a list
+		function ExtractStockTransactionsFromList(stockID,mainList,list){
 			var deferred = $q.defer();
 			for(var i = 0; i < list.length; i++){
 				if(list[i].stock == stockID){
