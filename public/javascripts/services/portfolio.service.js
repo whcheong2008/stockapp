@@ -87,8 +87,12 @@
 			var totalValue = 0;
 			var currentQty = qty;
 			for(var i = list.length -1; i >= 0; i--){
-				totalValue += currentQty * list[i].price;
-				currentQty = list[i].volume - currentQty;
+				if(list[i].volume < currentQty){
+					totalValue += list[i].volume * list[i].price;
+				}else{
+					totalValue += currentQty * list[i].price;
+				}
+				currentQty = currentQty- list[i].volume;
 				if(currentQty <= 0){
 					break;
 				}
