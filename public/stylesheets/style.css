@@ -440,7 +440,9 @@ body.fixed-sidebar.mini-navbar #page-wrapper {
   margin: 0 0 0 0;
 }
 body.body-small.fixed-sidebar.mini-navbar #page-wrapper {
-  margin: 0 0 0 220px;
+  /*margin: 0 0 0 220px;*/
+  margin: 0 0 0 0;
+  padding: 0 0 0 20px;
 }
 body.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
   width: 220px;
@@ -8265,7 +8267,9 @@ body.md-skin {
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
-    margin: 0 0 0 220px;
+    /*margin: 0 0 0 220px;*/
+	margin: 0 0 0 0;
+	padding: 0 0 0 20px;
     min-height: 1200px;
   }
   .navbar-static-side {
