@@ -12,6 +12,7 @@
 		
 		
 		stockCtrl.OpenAddTransactionForm = OpenAddTransactionForm;
+		stockCtrl.DisplayPurchases = DisplayPurchases;
 		
 		$q.all([StockService.UpdatePurchaseListInApp($rootScope.globals.currentUser.id),
 				StockService.UpdateSaleListInApp($rootScope.globals.currentUser.id)
@@ -43,7 +44,10 @@
 				stockCtrl.portfolio = portfolio;
 			});
 		}
-
+		
+		function DisplayPurchases(){
+			$scope.hidePurchases = true;
+		}
 		
 		function OpenAddTransactionForm(transactionform,transactiontype){
 			$scope.transactionform = transactionform; // 1 is new addition, 2 is editing
