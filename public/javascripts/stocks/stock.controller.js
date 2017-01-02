@@ -18,7 +18,7 @@
 		
 		function CreatePortfolio(){
 			$q.all([ListPurchases(),ListSales()]).then(function(res){
-				PortfolioService.GeneratePortfolio(stockCtrl.purchases, stockCtrl.sales).then(function(portfolio){
+				PortfolioService.ProcessPortfolio(stockCtrl.purchases, stockCtrl.sales).then(function(portfolio){
 					stockCtrl.portfolio = portfolio;
 				});
 			});

@@ -11,7 +11,7 @@
 	function PortfolioService(StockService,$q){
 		var service = {};
 		
-		service.GeneratePortfolio = GeneratePortfolio;
+		service.ProcessPortfolio = ProcessPortfolio;
 		
 		//This method is the overall method that generates the portfolio based on FIFO method
 		function GeneratePortfolio(purchases,sales){
@@ -33,8 +33,21 @@
 			return deferred.promise;
 		}
 		
-		function ProcessPortfolio(){
-			
+		function ProcessPortfolio(purchases,sales){
+			var deferred = $q.defer();
+			var finalList = [];
+			var originalList = [];
+			var j = 0;
+			GeneratePortfolio(purchases,sales).then(function(originalList){
+				for(var i = 0; i < originalList.length; i++){
+					if (originalList[i].position.qty != 0) {
+						finalList[j] = originalList [i];
+						j++;
+					}			
+				}	
+			});			
+			deferred.resolve(finalList);
+			return deferred.promise;
 		}
 		
 		//This method computes a stock position based on all Purchases and Sales
@@ -43,8 +56,9 @@
 			for(var i = 0; i < stockList.length; i++){
 				if(stockID == stockList[i].stock_id){
 					var purchaseQty = SumAllTransactionQuantity(stockList[i].purchases);
-					var saleQty = SumAllTransactionQuantity(stockList[i].sales);
+					var saleQty = SumAllTransactionQuantity(stockList[i].sales);					
 					var num = RetainNumber(i);
+					
 					stockList[i].position = {};
 					$q.all({pqty:purchaseQty,sqty:saleQty,number:num}).then(function(resolutions){
 						var qty = resolutions.pqty - resolutions.sqty;
