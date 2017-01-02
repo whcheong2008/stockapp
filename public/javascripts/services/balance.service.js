@@ -9,7 +9,7 @@
 	function BalanceManagementService($http){
 		var service = {};
 		
-		function RetrieveAllDepositsByUser
+		function RetrieveAllDepositsByUser()
 		
 		return service;
 	}
