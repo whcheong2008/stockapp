@@ -1,12 +1,13 @@
 body{
 	background-color:white;
 }
+/*
 .wrapper {
   margin: 0 auto;
   padding: 40px;
   max-width: 800px;
 }
-
+*/
 .purchase-listing-section{
 	width:75%;
 }
@@ -57,10 +58,10 @@ body{
     display: block;
   }
 }
-
+/*
 .btn{
 	margin-bottom:5px;
 }
-
-.edit {color: #1d9d74;}
-.danger {color: #c9302c;}
+*/
+.text-green {color: #1d9d74;}
+.text-white {color: white;}
