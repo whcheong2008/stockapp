@@ -25,7 +25,6 @@
 		
 		function OpenEditTransactionForm(id){
 			$scope.transactionform = "2"; //2 is fixed for edit forms (1 is for addition)
-			$scope.UpdateTransactionList = UpdateTransactionList;
 			$scope.transactiontype = listCtrl.transactiontype;
 			for(var i = 0; i < listCtrl.list.length; i++){
 				if(listCtrl.list[i].id == id){
