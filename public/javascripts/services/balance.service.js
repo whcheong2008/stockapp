@@ -9,7 +9,9 @@
 	function BalanceManagementService($http){
 		var service = {};
 		
-		function RetrieveAllDepositsByUser()
+		function RetrieveAllDepositsByUser(id){
+			return $http.post('balance/getDepositsByUser',{id:userID});
+		}
 		
 		return service;
 	}
