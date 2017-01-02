@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="stockapp">
+  <head>
+    <title>Stock App</title>
+    <!-- StyleSheets -->
+
+	<link rel='stylesheet' href='/stylesheets/animate.css' />    
+	<link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+	<link rel='stylesheet' href='/stylesheets/ngDialog.min.css' />
+	<link rel='stylesheet' href='/stylesheets/style.css' />
+	<link rel='stylesheet' href='/font-awesome/css/font-awesome.css'/>
+
+	<script src="/javascripts/bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="/javascripts/bower_components/angular/angular.min.js"></script>
+	<script src="/javascripts/bower_components/angular-route/angular-route.min.js"></script>
+	<script src="/javascripts/bower_components/angular-cookies/angular-cookies.min.js"></script>
+	<script src="/javascripts/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>	
+    <script src="/javascripts/bower_components/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/javascripts/bower_components/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/javascripts/bower_components/plugins/jeditable/jquery.jeditable.js"></script>
+	<script src="/javascripts/bower_components/inspinia.js"></script>
+	<script src="/javascripts/bower_components/ngDialog.min.js"></script>
+	
+	<!--- Modules Start-->
+		<script src="/javascripts/stockapp.js"></script>
+		<script src="/javascripts/login/login.controller.js"></script>
+		<script src="/javascripts/stocks/stock.controller.js"></script>
+		<script src="/javascripts/stocks/transaction.controller.js"></script>
+		<script src="/javascripts/stocks/listing.component.js"></script>
+	<!-- Modules End-->
+	
+	<!-- Services Start-->
+		<script src="/javascripts/services/authentication.service.js"></script>
+		<script src="/javascripts/services/user.service.js"></script>
+		<script src="/javascripts/services/stock.service.js"></script>
+		<script src="/javascripts/services/portfolio.service.js"></script>
+	<!-- Services End-->
+  </head>
+  <body>
+	<ng-view></ng-view>
+  </body>
+</html>

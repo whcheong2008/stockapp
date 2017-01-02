@@ -1,0 +1,33 @@
+<link rel="stylesheet" href='/stylesheets/plugins/datapicker/datepicker3.css' />
+<script src="/javascripts/bower_components/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+<div ng-controller="PurchaseController as purCtrl"class="ibox float-e-margins col-md-12 border_form_purchase">
+	<div class="">
+		<div ng-switch on="saleForm"> 
+			<h2 ng-switch-when="1">Enter Sale </h2> 
+			<h2 ng-switch-when="2">Edit Sale </h2> 
+		</div>
+		<form>
+			
+			<div class="form-group col-md-12" ng-switch on="saleForm">
+				<button class="btn btn-w-m btn-warning" type="submit" ng-switch-when="1">Add Sale</button>
+				<button class="btn btn-w-m btn-warning" type="submit" ng-switch-when="2">Edit Sale</button>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+$(document).ready(function(){
+
+            $('#data_1 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+          
+
+        });
+
+</script>
