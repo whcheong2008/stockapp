@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var stocks = require('./routes/stocks');
+var balance = require('./routes/balance');
 //db connection
 var dbCont = require('./controllers/db_controller');
 var db = dbCont.startDB();
@@ -48,6 +49,7 @@ app.use(function(req,res,next){
 app.use('/', index);
 app.use('/users', users);
 app.use('/stocks', stocks);
+app.use('/balance', balance);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
