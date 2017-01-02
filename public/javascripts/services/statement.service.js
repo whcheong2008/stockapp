@@ -17,9 +17,9 @@
 			var stockPurchases = [];
 			PortfolioService.ExtractStockTransactionsFromList(stockID,stockPurchases,purchases);
 			PortfolioService.ExtractStockTransactionsFromList(stockID,stockSales,sales);
-			$q.all([ss:stockSales,sp:stockPurchases]).then(function(resolutions){
+			//$q.all([ss:stockSales,sp:stockPurchases]).then(function(resolutions){
 				//to be continued
-			});
+			//});
 		}
 		
 		function GetSaleQuantityUpToDate(saleID,saleDate,sales){
