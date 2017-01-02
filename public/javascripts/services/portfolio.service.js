@@ -101,7 +101,7 @@
 			var vol = 0;
 			
 			for(var i = 0; i < list.length; i++){
-				vol += list[i].volume + vol;
+				vol += list[i].volume;
 			}
 			deferred.resolve(vol);
 			return deferred.promise;
