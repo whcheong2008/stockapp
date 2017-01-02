@@ -33,12 +33,12 @@
 			ProcessTransaction().then(function(transaction){
 				if($scope.transactiontype == 1) {
 					StockService.InsertPurchase(transaction).then(function(res){
-						$scope.CreatePortfolio();
+						StockService.UpdatePurchaseListInApp($rootScope.globals.currentUser.id);
 					});
 				}
 				if($scope.transactiontype == 2){
 					StockService.InsertSale(transaction).then(function(res){
-						$scope.CreatePortfolio();
+						StockService.UpdateSaleListInApp($rootScope.globals.currentUser.id);
 					})
 				}
 			});		
@@ -54,17 +54,17 @@
 			$scope.closeThisDialog();
 		}
 		
-		function EditTransaction(){;
+		function EditTransaction(){
 			ProcessTransaction().then(function(transaction){
 				transaction.id = $scope.transactionToEdit.id;
 				if($scope.transactiontype == 1) {				
 					StockService.EditPurchase(transaction).then(function(res){
-						$scope.UpdateTransactionList(); //UpdateTransactionList and ListPurchases/ListSales are essentially similar transactions
+						StockService.UpdatePurchaseListInApp($rootScope.globals.currentUser.id);
 					});
 				}
 				if($scope.transactiontype == 2) {
 					StockService.EditSale(transaction).then(function(res){
-						$scope.UpdateTransactionList();
+						StockService.UpdateSaleListInApp($rootScope.globals.currentUser.id);
 					});
 				}
 			});

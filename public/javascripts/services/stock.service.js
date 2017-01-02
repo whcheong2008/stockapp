@@ -5,9 +5,9 @@
 		.module('stockapp')
 		.factory('StockService',StockService);
 		
-	StockService.$inject = ['$http','$q'];
+	StockService.$inject = ['$http','$q','$rootScope'];
 	
-	function StockService($http,$q){
+	function StockService($http,$q,$rootScope){
 		var service = {};
 		
 		
@@ -23,6 +23,18 @@
 		service.DeletePurchase = DeletePurchase;
 		service.EditPurchase = EditPurchase;
 		service.ProcessPurchaseItemProperties = ProcessPurchaseItemProperties;
+		service.UpdatePurchaseListInApp = UpdatePurchaseListInApp;
+		
+		function UpdatePurchaseListInApp(userID){
+			var deferred = $q.defer();
+			GetStockPurchasesByUser(userID).then(function(res){
+				ProcessPurchaseItemProperties(res.data).then(function(purchases){
+					$rootScope.globals.purchaseList = purchases;			
+					deferred.resolve();
+				});
+			});
+			return deferred.promise;
+		}
 		
 		function GetStockPurchasesByUser(userID){
 			return $http.post('stocks/getPurchases',{id:userID});
@@ -64,6 +76,18 @@
 		service.DeleteSale = DeleteSale;
 		service.GetStockSalesByUser = GetStockSalesByUser;
 		service.ProcessSaleItemProperties = ProcessSaleItemProperties;
+		service.UpdateSaleListInApp = UpdateSaleListInApp;
+		
+		function UpdateSaleListInApp(userID){
+			var deferred = $q.defer();
+			GetStockSalesByUser(userID).then(function(res){
+				ProcessSaleItemProperties(res.data).then(function(sales){
+					$rootScope.globals.salesList = sales;			
+					deferred.resolve();
+				});
+			});
+			return deferred.promise;
+		}
 		
 		function GetStockSalesByUser(userID){
 			return $http.post('stocks/getSales',{id:userID});

@@ -5,10 +5,10 @@
 		.module('stockapp')
 		.factory('PortfolioService',PortfolioService);
 	
-	PortfolioService.$inject = ['StockService','$q'];
+	PortfolioService.$inject = ['$q'];
 	
 	//All lists used in this Service is presumed to be after StockService Properties Processing
-	function PortfolioService(StockService,$q){
+	function PortfolioService($q){
 		var service = {};
 		
 		service.ProcessPortfolio = ProcessPortfolio;

@@ -40,32 +40,14 @@
 			if(confirm("Are you sure to delete this transaction?")){
 				if($scope.transactiontype == 1){
 					StockService.DeletePurchase(id).then(function(res){
-						UpdateTransactionList();
+						StockService.UpdatePurchaseListInApp($rootScope.globals.currentUser.id);
 					});
 				}
 				if($scope.transactiontype == 2){
 					StockService.DeleteSale(id).then(function(res){
-						UpdateTransactionList();
+						StockService.UpdateSaleListInApp($rootScope.globals.currentUser.id);
 					});
 				}
-			}
-		}
-		
-		function UpdateTransactionList(){
-			var userID = $rootScope.globals.currentUser.id;
-			if($scope.transactiontype == 1) { //1 for purchases	
-				StockService.GetStockPurchasesByUser(userID).then(function(res){
-					StockService.ProcessPurchaseItemProperties(res.data).then(function(purchases){
-						listCtrl.list = purchases;
-					});
-				});
-			}
-			if($scope.transactiontype == 2){ //2 for sales
-				StockService.GetStockSalesByUser(userID).then(function(res){
-					StockService.ProcessSaleItemProperties(res.data).then(function(sales){
-						listCtrl.list = sales;
-					});
-				});
 			}
 		}
 	}
