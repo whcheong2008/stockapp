@@ -13,22 +13,19 @@
 		
 		service.ProcessPortfolio = ProcessPortfolio;
 		service.ExtractStockTransactionsFromList = ExtractStockTransactionsFromList;
+		service.ArrangeListByDate = ArrangeListByDate;
 		
 		//This method is the overall method that generates the portfolio based on FIFO method
 		function GeneratePortfolio(purchases,sales){
 			var deferred = $q.defer();
 			var finalList = [];
-			ArrangeListByDate(purchases).then(function(processedPurchases){
-				ArrangeListByDate(sales).then(function(processedSales){
-					CreateCompiledStockList(processedPurchases,processedSales).then(function(stockList){
-						for(var i = 0; i < stockList.length; i++){
-							ComputeStockPosition(stockList[i].stock_id,stockList);
-						}
-						$q.all(stockList).then(function(list){
-							finalList = list;
-							deferred.resolve(finalList);
-						});
-					});
+			CreateCompiledStockList(purchases,sales).then(function(stockList){		
+				for(var i = 0; i < stockList.length; i++){
+					ComputeStockPosition(stockList[i].stock_id,stockList);
+				}
+				$q.all(stockList).then(function(list){
+					finalList = list;
+					deferred.resolve(finalList);
 				});
 			});
 			return deferred.promise;
@@ -144,8 +141,8 @@
 					ExtractStockTransactionsFromList(stockList[i].stock_id,stockList[i].sales,sales);					
 				}
 				deferred.resolve(stockList);
+				
 			});
-			
 			return deferred.promise;
 		}
 		//This method extract the id and name of the stocks involved in all transactions and returns an array

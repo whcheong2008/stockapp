@@ -40,7 +40,7 @@
 					<td ng-switch-when="1" class="transaction-listing-cell">{{transaction.last_price  | currency}}</td>
 					<td ng-switch-when="1" class="transaction-listing-cell">{{transaction.last_price  * transaction.volume | currency}}</td>
 					
-					<td ng-switch-when="2" class="transaction-listing-cell">{{transaction.price | currency}}</td>
+					<td ng-switch-when="2" class="transaction-listing-cell">{{transaction.purchased_price | currency}}</td>
 					<td ng-switch-when="2" class="transaction-listing-cell">{{transaction.price | currency}}</td>
 					<td ng-switch-when="2" class="transaction-listing-cell">{{transaction.price | currency}}</td>
 					<td ng-switch-when="2" class="transaction-listing-cell">{{transaction.price}}</td>

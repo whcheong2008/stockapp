@@ -5,9 +5,9 @@
 		.module('stockapp')
 		.factory('StockService',StockService);
 		
-	StockService.$inject = ['$http','$q','$rootScope'];
+	StockService.$inject = ['$http','$q','$rootScope','StatementService','PortfolioService'];
 	
-	function StockService($http,$q,$rootScope){
+	function StockService($http,$q,$rootScope,StatementService,PortfolioService){
 		var service = {};
 		
 		
@@ -29,8 +29,10 @@
 			var deferred = $q.defer();
 			GetStockPurchasesByUser(userID).then(function(res){
 				ProcessPurchaseItemProperties(res.data).then(function(purchases){
-					$rootScope.globals.purchaseList = purchases;			
-					deferred.resolve();
+					PortfolioService.ArrangeListByDate(purchases).then(function(processedPurchases){
+						$rootScope.globals.purchaseList = processedPurchases;			
+						deferred.resolve();
+					});
 				});
 			});
 			return deferred.promise;
@@ -82,10 +84,24 @@
 			var deferred = $q.defer();
 			GetStockSalesByUser(userID).then(function(res){
 				ProcessSaleItemProperties(res.data).then(function(sales){
-					$rootScope.globals.salesList = sales;			
-					deferred.resolve();
+					PortfolioService.ArrangeListByDate(sales).then(function(processedSales){
+						UpdatePurchasePriceInSales(processedSales,$rootScope.globals.purchaseList).then(function(finalSales){
+							alert(JSON.stringify(finalSales));
+							$rootScope.globals.salesList = finalSales;			
+							deferred.resolve();						
+						});
+					});
 				});
 			});
+			return deferred.promise;
+		}
+		
+		function UpdatePurchasePriceInSales(sales,purchases){
+			var deferred = $q.defer();
+			//for(var i = 0; i < sales.length; i++){
+				sales[0].purchased_price = StatementService.ComputePurchasePriceForSale(sales[0],sales,purchases);
+			//}
+			deferred.resolve(sales[0]);
 			return deferred.promise;
 		}
 		

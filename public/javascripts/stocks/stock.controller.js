@@ -5,9 +5,9 @@
 		.module('stockapp')
 		.controller('StockController',StockController);
 	
-	StockController.$inject = ['StockService','$rootScope','ngDialog','$scope','PortfolioService','$q'];
+	StockController.$inject = ['StockService','$rootScope','ngDialog','$scope','PortfolioService','$q','StatementService'];
 	
-	function StockController(StockService,$rootScope,ngDialog,$scope,PortfolioService,$q){
+	function StockController(StockService,$rootScope,ngDialog,$scope,PortfolioService,$q,StatementService){
 		var stockCtrl = this;
 		
 		
@@ -19,6 +19,7 @@
 		]).then(function(res){
 			stockCtrl.purchases = $rootScope.globals.purchaseList;
 			stockCtrl.salesList = $rootScope.globals.salesList;
+			
 		});
 		
 		$scope.$watch(function(){
@@ -41,7 +42,8 @@
 		
 		function CreatePortfolio(){
 			PortfolioService.ProcessPortfolio(stockCtrl.purchases, stockCtrl.sales).then(function(portfolio){				
-				stockCtrl.portfolio = portfolio;
+				stockCtrl.portfolio = portfolio;	
+				
 			});
 		}
 		
